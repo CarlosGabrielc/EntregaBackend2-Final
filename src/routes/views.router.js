@@ -3,6 +3,11 @@ import { Product } from '../models/Product.js';
 
 const router = Router();
 
+// 👉 Redirigir raíz "/" a "/products"
+router.get("/", (req, res) => {
+  res.redirect("/products");
+});
+
 router.get('/products', async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 10;

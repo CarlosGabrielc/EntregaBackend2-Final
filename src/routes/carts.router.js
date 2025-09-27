@@ -1,12 +1,16 @@
-// routes/carts.router.js
+// src/routes/carts.router.js
 import express from 'express';
-// import { Cart } from '../models/Cart.js';
-import { Product } from '../models/Product.js';
+import passport from 'passport';
 import { Cart } from '../models/Cart.js';
+import { addToCart } from "../controllers/cartsController.js";
+import { authorize } from "../middlewares/authorization.js";
 
 const router = express.Router();
 
-// GET /api/carts/:cid => Mostrar carrito con productos populados
+// POST /api/carts/:pid → Agregar producto al carrito (solo usuario)
+router.post("/:pid", passport.authenticate("jwt", { session: false }), authorize(["user"]), addToCart);
+
+// GET /api/carts/:cid → Mostrar carrito con productos populados
 router.get('/:cid', async (req, res) => {
   try {
     const cart = await Cart.findById(req.params.cid).populate('products.product');
@@ -37,7 +41,7 @@ router.delete('/:cid/products/:pid', async (req, res) => {
 // PUT /api/carts/:cid → Reemplazar todos los productos del carrito
 router.put('/:cid', async (req, res) => {
   const { cid } = req.params;
-  const { products } = req.body; // [{ product: id, quantity: n }]
+  const { products } = req.body;
 
   try {
     const cart = await Cart.findById(cid);

@@ -6,6 +6,13 @@ import productRouter from './routes/products.router.js';
 import handlebars from 'express-handlebars';
 import __dirname from './utils/utils.js';
 import path from 'path';
+import viewsRouter from './routes/views.router.js';
+import sessionsRouter from "./routes/sessions.router.js";
+import userRouter from "./routes/users.js";
+
+
+
+
 
 const app = express();
 const PORT = 8080;
@@ -14,19 +21,19 @@ const PORT = 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configurar Handlebars (para vistas)
+// Configurar Handlebars
 app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, '/views'));
+app.set('views', path.join(__dirname, '../views'));
+
 
 // Rutas API
 app.use('/api/carts', cartRouter);
 app.use('/api/products', productRouter); 
-
-// Rutas vistas (si las tenés en views.router.js)
-import viewsRouter from './routes/views.router.js';
 app.use('/', viewsRouter);
-
+app.use("/api/sessions", sessionsRouter);
+app.use("/api/users", userRouter);
+app.use("/api/users", userRouter);
 // Conexión a MongoDB
 const MONGO_URL = 'mongodb://127.0.0.1:27017/tuDB'; 
 

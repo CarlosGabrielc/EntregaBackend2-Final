@@ -1,10 +1,16 @@
 {
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "crypto": "^1.0.1",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.1",
-    "mongoose": "^8.15.1",
-    "mongoose-paginate-v2": "^1.9.0"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.2",
+    "mongoose-paginate-v2": "^1.9.0",
+    "nodemailer": "^7.0.6",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
   },
   "scripts": {
     "start": "node src/app.js",
@@ -13,5 +19,12 @@
   "devDependencies": {
     "nodemon": "^3.1.10"
   },
-  "type": "module"
+  "type": "module",
+  "name": "preentregafinal-coderhouse-b2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
